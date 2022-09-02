@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System.Collections;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using Polly;
 using Polly.RateLimit;
 
@@ -10,11 +8,11 @@ var consumer = new Consumer();
 var bag = new BlockingCollection<int>();
 
 var rateLimit = Policy
-		.RateLimit( 5, TimeSpan.FromSeconds( 10 ), 5 );
+		.RateLimitAsync( 5, TimeSpan.FromSeconds( 10 ), 5 );
 
 var retryPolicy = Policy
 		.Handle<RateLimitRejectedException>()
-		.RetryForever(onRetry: ex => {
+		.RetryForeverAsync(onRetry: ex => {
 			
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine( $"Waiting {((RateLimitRejectedException)ex).RetryAfter}" );
@@ -22,7 +20,8 @@ var retryPolicy = Policy
 			Task.Delay( ((RateLimitRejectedException)ex).RetryAfter ).Wait();
 		});
 			
-var policy = Policy.Wrap( retryPolicy, rateLimit );
+
+var policy = Policy.WrapAsync( retryPolicy, rateLimit );
 
 
 var task1 = Task.Run( async () => {
@@ -37,12 +36,16 @@ var task2 = Task.Run( async () => {
 
 	while( !bag.IsCompleted )
 	{
-		if( bag.TryTake( out number, TimeSpan.FromSeconds(2) ) )
+		Console.ForegroundColor = ConsoleColor.Blue;
+		Console.WriteLine("Try fetch");
+
+		if( bag.TryTake( out number, TimeSpan.FromSeconds(5) ) )
 		{
-			await policy.Execute( () => consumer.Process( number ) );
+			await policy.ExecuteAsync( () => consumer.Process( number ) );
 		}
 	}
 });
+
 
 Task.WaitAll( task1, task2 );
 
