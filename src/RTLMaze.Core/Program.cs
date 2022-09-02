@@ -1,7 +1,28 @@
 ﻿using System.Collections.Concurrent;
+using System.Net;
+using System.Net.Security;
+using System.Text.Json;
 using Polly;
 using Polly.RateLimit;
 
+using RTLMaze.Core.Models;
+
+
+var source = new HttpStreamSource()
+					.FromUrl("https://api.tvmaze.com/updates/shows?since=day");
+
+var processor = new JsonStreamConverter<Dictionary<string,long>>();
+var updated = processor.Convert( source );
+
+long offset = new DateTimeOffset( DateTime.UtcNow ).AddHours( -12 ).ToUnixTimeSeconds();
+
+var updatedSinceOffset = updated
+		.Where( kp => kp.Value > offset )
+		.Select( kp => Int32.Parse( kp.Key ) );
+
+Console.WriteLine( JsonSerializer.Serialize( updatedSinceOffset ) );
+
+/*
 var producer = new Producer();
 var consumer = new Consumer();
 
@@ -84,4 +105,4 @@ public class Consumer
 		Console.ForegroundColor = ConsoleColor.Magenta;
 		Console.WriteLine( $"[consume] Thread: {Thread.CurrentThread.ManagedThreadId}, Item: ${i}" );
 	}
-}
+}*/
