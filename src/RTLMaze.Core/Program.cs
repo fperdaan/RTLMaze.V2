@@ -17,9 +17,9 @@ var task1 = Task.Run( async () => {
 var task2 = Task.Run( () => {
 	int number;
 
-	while( !bag.IsAddingCompleted )
+	while( !bag.IsCompleted )
 	{
-		if( bag.TryTake( out number ) )
+		if( bag.TryTake( out number, TimeSpan.FromSeconds(1) ) )
 			consumer.Process( number );
 	}
 });
