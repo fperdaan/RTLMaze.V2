@@ -41,17 +41,12 @@ public partial class JsonStreamConverter<TOutput> : IConverter<Stream, TOutput>
 
 		try 
 		{
-			using ( StreamReader reader = new StreamReader( source.GetData() ) )
-			{
-				string json = reader.ReadToEnd();
-				result = JsonSerializer.Deserialize<TOutput>( json, _serializerOptions );
-			}
+			result = JsonSerializer.Deserialize<TOutput>( source.GetData(), _serializerOptions );
 		}
 		catch( Exception e )
 		{
 			throw new JsonParseException( "The supplied stream does not match the expected json format", e );
 		}
-
 
 		if( result == null )
 			throw new JsonParseException( "The serialization resolved in an empty result" );
