@@ -8,6 +8,21 @@ using Polly.RateLimit;
 using RTLMaze.Core.Models;
 
 
+
+// Though
+
+// Naming: Converter vs Processor, what is better?
+// Would be cool if we create a linked list trough the processors, so they can invoke each-other using the output. 
+// Thus allowing a chain of processing
+
+// Next?.Process()
+
+// Can we make this work in the generic interface? Not with a return chain I think, so maybe the processor indeed is a diffent class.
+// Not returning anything but do allow chaining of results into one another? 
+
+
+// --------------------------------------------------
+
 var source = new HttpStreamSource()
 					.FromUrl("https://api.tvmaze.com/updates/shows?since=day");
 
