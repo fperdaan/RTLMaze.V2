@@ -1,6 +1,6 @@
 namespace RTLMaze.Core;
 
-static public class Enumerable
+static public class EnumerableExtension
 {	
 	static public IEnumerable<TSource> WhereIf<TSource>( this IEnumerable<TSource> source, bool cond,  Func<TSource, bool> predicate )
 	{	
