@@ -12,7 +12,7 @@ using RTLMaze.Core.Models.MazeScraper;
 
 
 
-// Though
+// -- Though #1
 
 // Naming: Converter vs Processor, what is better?
 // Would be cool if we create a linked list trough the processors, so they can invoke each-other using the output. 
@@ -23,6 +23,11 @@ using RTLMaze.Core.Models.MazeScraper;
 // Can we make this work in the generic interface? Not with a return chain I think, so maybe the processor indeed is a diffent class.
 // Not returning anything but do allow chaining of results into one another? 
 
+
+// -- Thought #2
+// Not really sure how the async methods in IProcessor and ISource really benefit in the current setup. This should probably be determined by 
+// the source / processor. Does that mean however that we also need to split up the interfaces into a sync and async interface? 
+// and how will that affect our coupeling? 
 
 // --------------------------------------------------
 
