@@ -36,6 +36,11 @@ using RTLMaze.Core.Models.MazeScraper;
 // Hmm but how do we make this managable; should we introduce an abstract solution containing logic/interfaces for scraping and then a secondary
 // solution specific to mazescraper as a source?
 
+// -- Thought #4 
+// The title updated source is probably to specific, to focused on updated ( might not be though )
+// What we also want is a list containing the deleted items. That can be extracted from the same source by running a diff between the current
+// register and the fetched register. Items whom are no longer on there are deleted
+
 // --------------------------------------------------
 
 var source = new TitleUpdatedSource();
