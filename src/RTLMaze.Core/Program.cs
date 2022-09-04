@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Polly;
 using Polly.RateLimit;
-
+using RTLMaze.Core;
 using RTLMaze.Core.Models;
 
 using RTLMaze.Core.Models.MazeScraper;
@@ -61,14 +61,26 @@ var policy = Policy.WrapAsync( retryPolicy, rateLimitPolicy );
 
 # endregion
 
+// As per ratelimiter; allow 10 items per 5 seconds
+var tracker = new ProgressTracker( itemCount: result.Count(), avgItemsPerSecond: 10 / 5 );
+
+
 foreach( var itemId in result )
 {
-	var title = await policy.ExecuteAsync( () => Task.Run( () => processor.Process( itemId  ) ) );
+	//var title = await policy.ExecuteAsync( () => Task.Run( () => processor.Process( itemId  ) ) );
 
-	Console.ForegroundColor = ConsoleColor.Magenta;
-	Console.WriteLine( JsonSerializer.Serialize( title ) );
+	// Console.ForegroundColor = ConsoleColor.Magenta;
+	// Console.WriteLine( JsonSerializer.Serialize( title ) );
+
+	await Task.Delay(50);
+
+	tracker.Next();	
+
+	Console.Clear();
+	Console.WriteLine( tracker );
 }
 
+//Console.WriteLine( $"Time spent: {tracker.Timer!.Elapsed.TotalSeconds} seconds");
 
 
 // var test = new JsonObject
