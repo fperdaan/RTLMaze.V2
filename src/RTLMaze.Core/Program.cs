@@ -71,6 +71,7 @@ var policy = Policy.WrapAsync( retryPolicy, rateLimitPolicy );
 // As per ratelimiter; allow 10 items per 5 seconds
 var tracker = new ProgressTracker( itemCount: result.Count(), avgItemsPerSecond: 10 / 5 );
 
+var pos = Console.GetCursorPosition();
 
 foreach( var itemId in result )
 {
@@ -83,7 +84,7 @@ foreach( var itemId in result )
 
 	tracker.Next();	
 
-	Console.Clear();
+	Console.SetCursorPosition( pos.Left, pos.Top );
 	Console.WriteLine( tracker );
 }
 
