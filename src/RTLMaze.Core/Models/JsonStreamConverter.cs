@@ -4,16 +4,16 @@ using RTLMaze.Core.Exceptions;
 
 namespace RTLMaze.Core.Models;
 
-public partial class JsonStreamConverter<TOutput> : IProcessor<ISource<Stream>, TOutput>
+public partial class JsonStreamConverter<TOutput> : IProcessor<Stream, TOutput>
 {
 	private JsonSerializerOptions _serializerOptions;
 
 	public JsonStreamConverter()
 	{
-		// -- todo; inject with DI
-		# region TODO
-		_serializerOptions = new JsonSerializerOptions();
-		# endregion
+		// -- TODO; inject with DI
+		_serializerOptions = new JsonSerializerOptions {
+			PropertyNameCaseInsensitive = true
+		};
 	}
 
 	# region Configuration interface
@@ -36,13 +36,13 @@ public partial class JsonStreamConverter<TOutput> : IProcessor<ISource<Stream>, 
 
 	# region Processor interface implementation
 
-	public virtual TOutput Process( ISource<Stream> source )
+	public virtual TOutput Process( Stream source )
 	{
 		TOutput? result;
 
 		try 
 		{
-			result = JsonSerializer.Deserialize<TOutput>( source.GetData(), _serializerOptions );
+			result = JsonSerializer.Deserialize<TOutput>( source, _serializerOptions );
 		}
 		catch( Exception e )
 		{
@@ -54,7 +54,6 @@ public partial class JsonStreamConverter<TOutput> : IProcessor<ISource<Stream>, 
 
 		return result;
 	}
-	public Task<TOutput> ProcessAsync( ISource<Stream> source ) => Task.Run( () => Process( source ) );
 
 	# endregion
 }

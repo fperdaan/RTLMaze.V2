@@ -32,7 +32,7 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 
 		var processor = new JsonStreamConverter<Dictionary<string,long>>();
 		
-		Dictionary<string,long> updated = processor.Process( source );
+		Dictionary<string,long> updated = processor.Process( source.GetData() );
 
 		// Cast the list to our format and possibly filter by update date
 	
@@ -41,8 +41,6 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 				.Select( kp => Int32.Parse( kp.Key ) )
 				.ToList();
 	}
-
-	public virtual Task<ICollection<int>> GetDataAsync() => Task.Run( () => GetData() );
 
 	# endregion
 }

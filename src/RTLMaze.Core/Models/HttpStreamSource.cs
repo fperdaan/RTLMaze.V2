@@ -1,5 +1,6 @@
 using System.Net;
 using Polly;
+using Polly.RateLimit;
 using Polly.Wrap;
 
 namespace RTLMaze.Core.Models;
@@ -25,6 +26,10 @@ public partial class HttpStreamSource : ISource<Stream>
 				.Handle<HttpRequestException>()
 				.OrResult<HttpResponseMessage>( r => codes.Contains( r.StatusCode ) )
 				.RetryAsync( 3 );
+
+		// -- TODO
+		// wrap ratelimiter into request policy; this however has no effect because the configruation is not yet 'shared' between 
+		// instances through DI
 
 		# endregion
 	}

@@ -31,7 +31,40 @@ var source = new TitleUpdatedSource();
 
 var result = source.GetData();
 
-Console.WriteLine( JsonSerializer.Serialize( result ) );
+
+var processor = new TitleDetailsProcessor();
+
+// The ratelimiter should be integrated into the http request policy. This because failed request/retries 
+// should also contribute to the ratelimiter
+# region TODO 
+
+var rateLimitPolicy = Policy
+		.RateLimitAsync( 5, TimeSpan.FromSeconds( 10 ), 5 );
+
+var retryPolicy = Policy
+		.Handle<RateLimitRejectedException>()
+		.RetryForeverAsync(onRetry: ex => {
+			
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine( $"Waiting {((RateLimitRejectedException)ex).RetryAfter}" );
+
+			Task.Delay( ((RateLimitRejectedException)ex).RetryAfter ).Wait();
+		});
+			
+
+var policy = Policy.WrapAsync( retryPolicy, rateLimitPolicy );	
+
+# endregion
+
+foreach( var itemId in result )
+{
+	var title = await policy.ExecuteAsync( () => Task.Run( () => processor.Process( itemId  ) ) );
+
+	Console.ForegroundColor = ConsoleColor.Magenta;
+	Console.WriteLine( JsonSerializer.Serialize( title ) );
+}
+
+
 
 // var test = new JsonObject
 // {
@@ -56,7 +89,7 @@ var consumer = new Consumer();
 
 var bag = new BlockingCollection<int>();
 
-var rateLimit = Policy
+var rateLimitPolicy = Policy
 		.RateLimitAsync( 5, TimeSpan.FromSeconds( 10 ), 5 );
 
 var retryPolicy = Policy
@@ -70,7 +103,7 @@ var retryPolicy = Policy
 		});
 			
 
-var policy = Policy.WrapAsync( retryPolicy, rateLimit );
+var policy = Policy.WrapAsync( retryPolicy, rateLimitPolicy );
 
 
 var task1 = Task.Run( async () => {
@@ -134,3 +167,10 @@ public class Consumer
 		Console.WriteLine( $"[consume] Thread: {Thread.CurrentThread.ManagedThreadId}, Item: ${i}" );
 	}
 }*/
+
+
+public class Title 
+{
+	public int ID { get; set; }
+	public string Name { get; set; } = "";
+}
