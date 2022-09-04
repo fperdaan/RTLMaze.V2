@@ -22,7 +22,24 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 
 	# region Source interface implementation 
 
-	public virtual ICollection<int> GetData()
+	public virtual IEnumerable<Title> GetData()
+	{
+		// This should be ratelimited indirectly through DI 
+		
+		var updated = _GetUpdatedItemIndex();
+		var converter = new TitleDetailsConverter();
+
+		foreach( var titleId in updated )
+		{
+			var title = converter.Process( titleId );
+
+			yield return title;
+		}
+
+	}
+
+	// -- Helper methods
+	public virtual IEnumerable<int> _GetUpdatedItemIndex()
 	{
 		// Not sure wether we should make this path configurable
 		// After all the import and parsing is tightly coupled to the source

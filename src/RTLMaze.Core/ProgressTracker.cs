@@ -117,7 +117,7 @@ public class ProgressTracker
 				content.Append( BLOCK );
 		}
 
-		content.Append( $"] {Progress:F3}%, {CurrentItem}/{ItemCount}" );    
+		content.Append( $"] {Progress:F2}%, {CurrentItem}/{ItemCount}" );    
 
 		return content.ToString();
 	}

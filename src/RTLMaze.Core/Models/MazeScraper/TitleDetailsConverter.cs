@@ -1,8 +1,8 @@
 namespace RTLMaze.Core.Models.MazeScraper;
 
-public partial class TitleDetailsProcessor : IProcessor<int, Title>
+public partial class TitleDetailsConverter : IProcessor<int, Title>
 {
-	public virtual Stream GetSource( int titleId )
+	protected virtual Stream _GetSource( int titleId )
 	{
 		// Not sure wether we should make this path configurable
 		// After all the import and parsing is tightly coupled to the source
@@ -23,7 +23,7 @@ public partial class TitleDetailsProcessor : IProcessor<int, Title>
 
 		var processor = new JsonStreamConverter<Title>();
 
-		return processor.Process( GetSource( titleId ) );
+		return processor.Process( _GetSource( titleId ) );
 	}
 
 	# endregion

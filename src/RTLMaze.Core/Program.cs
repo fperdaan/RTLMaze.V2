@@ -41,40 +41,17 @@ using RTLMaze.Core.Models.MazeScraper;
 // What we also want is a list containing the deleted items. That can be extracted from the same source by running a diff between the current
 // register and the fetched register. Items whom are no longer on there are deleted
 
-// -- Thought #5 
-// The title updated source should probably be responsible for casting from an int to a title 
-
 // --------------------------------------------------
 
-var source = new TitleUpdatedSource();
-	source.Since( DateTime.Now.AddDays( -1 ) ); 
+// var source = new TitleUpdatedSource();
+// 	source.Since( DateTime.Now.AddDays( -1 ) ); 
 
-var result = source.GetData();
+// foreach( var title in source.GetData() )
+// {
+// 	Console.WriteLine( title );
+// }
 
-
-var processor = new TitleDetailsProcessor();
-
-// The ratelimiter should be integrated into the http request policy. This because failed request/retries 
-// should also contribute to the ratelimiter
-# region TODO 
-
-var rateLimitPolicy = Policy
-		.RateLimitAsync( 5, TimeSpan.FromSeconds( 10 ), 5 );
-
-var retryPolicy = Policy
-		.Handle<RateLimitRejectedException>()
-		.RetryForeverAsync(onRetry: ex => {
-			
-			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine( $"Waiting {((RateLimitRejectedException)ex).RetryAfter}" );
-
-			Task.Delay( ((RateLimitRejectedException)ex).RetryAfter ).Wait();
-		});
-			
-
-var policy = Policy.WrapAsync( retryPolicy, rateLimitPolicy );	
-
-# endregion
+var result = Enumerable.Range( 1, 200 );
 
 // As per ratelimiter; allow 10 items per 5 seconds
 var tracker = new ProgressTracker( itemCount: result.Count(), avgItemsPerSecond: 10 / 5 );
@@ -83,11 +60,6 @@ var pos = Console.GetCursorPosition();
 
 foreach( var itemId in result )
 {
-	//var title = await policy.ExecuteAsync( () => Task.Run( () => processor.Process( itemId  ) ) );
-
-	// Console.ForegroundColor = ConsoleColor.Magenta;
-	// Console.WriteLine( JsonSerializer.Serialize( title ) );
-
 	await Task.Delay(50);
 
 	tracker.Next();	
