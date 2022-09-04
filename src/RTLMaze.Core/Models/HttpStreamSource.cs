@@ -29,7 +29,7 @@ public partial class HttpStreamSource : ISource<Stream>
 		# endregion
 	}
 
-	# region Fluent interface 
+	# region Configuration interface 
 
 	public virtual HttpStreamSource FromUrl( string sourceUrl )
 	{

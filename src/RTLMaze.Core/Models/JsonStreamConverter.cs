@@ -4,7 +4,7 @@ using RTLMaze.Core.Exceptions;
 
 namespace RTLMaze.Core.Models;
 
-public partial class JsonStreamConverter<TOutput> : IConverter<Stream, TOutput>
+public partial class JsonStreamConverter<TOutput> : IProcessor<ISource<Stream>, TOutput>
 {
 	private JsonSerializerOptions _serializerOptions;
 
@@ -16,7 +16,7 @@ public partial class JsonStreamConverter<TOutput> : IConverter<Stream, TOutput>
 		# endregion
 	}
 
-	# region Fluid interface
+	# region Configuration interface
 
 	public virtual JsonStreamConverter<TOutput> AddSerializerConverter( JsonConverter converter )
 	{
@@ -35,7 +35,8 @@ public partial class JsonStreamConverter<TOutput> : IConverter<Stream, TOutput>
 	# endregion
 
 	# region Processor interface implementation
-	public virtual TOutput Convert( ISource<Stream> source )
+
+	public virtual TOutput Process( ISource<Stream> source )
 	{
 		TOutput? result;
 
@@ -53,6 +54,7 @@ public partial class JsonStreamConverter<TOutput> : IConverter<Stream, TOutput>
 
 		return result;
 	}
-	public Task<TOutput> ConvertAsync( ISource<Stream> source ) => Task.Run( () => Convert( source ) );
+	public Task<TOutput> ProcessAsync( ISource<Stream> source ) => Task.Run( () => Process( source ) );
+
 	# endregion
 }

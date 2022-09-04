@@ -2,10 +2,13 @@
 using System.Net;
 using System.Net.Security;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using Polly;
 using Polly.RateLimit;
 
 using RTLMaze.Core.Models;
+
+using RTLMaze.Core.Models.MazeScraper;
 
 
 
@@ -23,19 +26,29 @@ using RTLMaze.Core.Models;
 
 // --------------------------------------------------
 
-var source = new HttpStreamSource()
-					.FromUrl("https://api.tvmaze.com/updates/shows?since=day");
+var source = new TitleUpdatedSource();
+	source.Since( DateTime.Now.AddDays( -1 ) ); 
 
-var processor = new JsonStreamConverter<Dictionary<string,long>>();
-var updated = processor.Convert( source );
+var result = source.GetData();
 
-long offset = new DateTimeOffset( DateTime.UtcNow ).AddHours( -12 ).ToUnixTimeSeconds();
+Console.WriteLine( JsonSerializer.Serialize( result ) );
 
-var updatedSinceOffset = updated
-		.Where( kp => kp.Value > offset )
-		.Select( kp => Int32.Parse( kp.Key ) );
+// var test = new JsonObject
+// {
+// 	["ID"] = 10,
+// 	["Name"] = "Under the dome",
+// 	["Cast"] = new JsonArray
+// 	{
+// 		new JsonObject 
+// 		{
+// 			["ID"] = 20,
+// 			["Name"] = "Some peroson",
+// 			["BirthDay"] = DateOnly.FromDateTime( DateTime.Now ).ToString("yyyy-MM-dd")
+// 		}
+// 	} 
+// };
 
-Console.WriteLine( JsonSerializer.Serialize( updatedSinceOffset ) );
+// Console.WriteLine( test.ToJsonString() );
 
 /*
 var producer = new Producer();
