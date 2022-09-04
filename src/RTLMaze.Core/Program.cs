@@ -31,7 +31,7 @@ using RTLMaze.Core.Models.MazeScraper;
 
 
 // -- Thought #3 
-// Is it logical to include the scraper in the core solution? In a bigger architecture it might be feasable that you have one scraper
+// Is it logical to include the scraper in the core solution? In a bigger architecture it might be plausible that you have one scraper
 // and other projects then sync from that source. Thus shipping information / classes / logic we dont need in our artifects.
 // Hmm but how do we make this managable; should we introduce an abstract solution containing logic/interfaces for scraping and then a secondary
 // solution specific to mazescraper as a source?
