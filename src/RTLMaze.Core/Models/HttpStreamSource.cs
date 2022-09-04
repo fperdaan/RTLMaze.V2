@@ -7,12 +7,12 @@ namespace RTLMaze.Core.Models;
 
 public partial class HttpStreamSource : ISource<Stream>
 {
-	public AsyncPolicy<HttpResponseMessage> RequestPolicy { get; set; }
+	static public AsyncPolicy<HttpResponseMessage> RequestPolicy { get; set; }
 	private string? _sourceUrl;
 
-	public HttpStreamSource()
+	static HttpStreamSource()
 	{
-		// -- todo; inject with DI
+		// -- todo; inject with DI and make non-static
 		# region TODO
 		var codes = new HttpStatusCode[]{
 			HttpStatusCode.RequestTimeout, // 408
@@ -22,14 +22,31 @@ public partial class HttpStreamSource : ISource<Stream>
 			HttpStatusCode.GatewayTimeout // 504
 		};
 
-		RequestPolicy = Policy
+		var requestPolicy = Policy
 				.Handle<HttpRequestException>()
 				.OrResult<HttpResponseMessage>( r => codes.Contains( r.StatusCode ) )
 				.RetryAsync( 3 );
 
-		// -- TODO
-		// wrap ratelimiter into request policy; this however has no effect because the configruation is not yet 'shared' between 
-		// instances through DI
+		
+
+		var rateLimitPolicy = Policy
+				.RateLimitAsync( 5, TimeSpan.FromSeconds( 10 ), 5 );
+
+		var retryPolicy = Policy
+				.Handle<RateLimitRejectedException>()
+				.RetryForeverAsync(onRetry: ex => {
+					
+					Console.ForegroundColor = ConsoleColor.Green;
+					Console.WriteLine( $"Waiting {((RateLimitRejectedException)ex).RetryAfter}" );
+					Console.ResetColor();
+
+					Task.Delay( ((RateLimitRejectedException)ex).RetryAfter ).Wait();
+				});
+					
+
+		RequestPolicy = Policy
+				.WrapAsync( retryPolicy, rateLimitPolicy )
+				.WrapAsync( requestPolicy );	
 
 		# endregion
 	}
