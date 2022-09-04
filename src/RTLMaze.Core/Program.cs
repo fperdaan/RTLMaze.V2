@@ -29,6 +29,13 @@ using RTLMaze.Core.Models.MazeScraper;
 // the source / processor. Does that mean however that we also need to split up the interfaces into a sync and async interface? 
 // and how will that affect our coupeling? 
 
+
+// -- Thought #3 
+// Is it logical to include the scraper in the core solution? In a bigger architecture it might be feasable that you have one scraper
+// and other projects then sync from that source. Thus shipping information / classes / logic we dont need in our artifects.
+// Hmm but how do we make this managable; should we introduce an abstract solution containing logic/interfaces for scraping and then a secondary
+// solution specific to mazescraper as a source?
+
 // --------------------------------------------------
 
 var source = new TitleUpdatedSource();
