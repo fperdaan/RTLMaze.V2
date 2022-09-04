@@ -41,6 +41,9 @@ using RTLMaze.Core.Models.MazeScraper;
 // What we also want is a list containing the deleted items. That can be extracted from the same source by running a diff between the current
 // register and the fetched register. Items whom are no longer on there are deleted
 
+// -- Thought #5 
+// The title updated source should probably be responsible for casting from an int to a title 
+
 // --------------------------------------------------
 
 var source = new TitleUpdatedSource();
