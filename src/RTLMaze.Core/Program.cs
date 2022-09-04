@@ -68,8 +68,6 @@ foreach( var itemId in result )
 	Console.WriteLine( tracker );
 }
 
-//Console.WriteLine( $"Time spent: {tracker.Timer!.Elapsed.TotalSeconds} seconds");
-
 
 // var test = new JsonObject
 // {
