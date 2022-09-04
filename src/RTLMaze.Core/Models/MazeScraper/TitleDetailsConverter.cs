@@ -2,6 +2,11 @@ namespace RTLMaze.Core.Models.MazeScraper;
 
 public partial class TitleDetailsConverter : IProcessor<int, Title>
 {
+	/// <summary>
+	/// Helper method used to converts the specified title id to a streaming source.
+	/// </summary>
+	/// <param name="titleId">The id the title gets referred by.</param>
+	/// <see cref="Process"/>
 	protected virtual Stream _GetSource( int titleId )
 	{
 		// Not sure wether we should make this path configurable
