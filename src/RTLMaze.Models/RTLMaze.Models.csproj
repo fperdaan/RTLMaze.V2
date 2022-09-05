@@ -6,12 +6,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="polly" Version="7.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\RTLMaze.Models\RTLMaze.Models.csproj" />
-  </ItemGroup>
-
 </Project>

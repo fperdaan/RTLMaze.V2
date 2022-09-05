@@ -1,6 +1,7 @@
-using RTLMaze.Importer.Models.Importer;
+using RTLMaze.Models;
+using RTLMaze.Importer.Models;
 
-namespace RTLMaze.Importer.Models.MazeScraper;
+namespace RTLMaze.MazeScraper.Models;
 
 public partial class TitleDetailsConverter : ITitleDetailConverter
 {

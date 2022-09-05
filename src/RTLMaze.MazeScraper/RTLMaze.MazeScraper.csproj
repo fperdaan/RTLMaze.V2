@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RTLMaze.Core\RTLMaze.Core.csproj" />
+    <ProjectReference Include="..\RTLMaze.Models\RTLMaze.Models.csproj" />
+    <ProjectReference Include="..\RTLMaze.Importer\RTLMaze.Importer.csproj" />
+  </ItemGroup>
+
+</Project>

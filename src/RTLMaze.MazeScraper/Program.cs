@@ -1,16 +1,4 @@
-﻿using System.Collections.Concurrent;
-using System.Net;
-using System.Net.Security;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using Polly;
-using Polly.RateLimit;
-using RTLMaze.Importer;
-using RTLMaze.Importer.Models;
-
-using RTLMaze.Importer.Models.MazeScraper;
-
-
+﻿using RTLMaze.MazeScraper.Models;
 
 // -- Though #1
 
@@ -31,15 +19,6 @@ using RTLMaze.Importer.Models.MazeScraper;
 
 
 // -- Thought #3 
-// Is it logical to include the scraper in the core solution? In a bigger architecture it might be plausible that you have one scraper
-// and other projects then sync from that source. Thus shipping information / classes / logic we dont need in our artifects.
-// Hmm but how do we make this managable; should we introduce an abstract solution containing logic/interfaces for scraping and then a secondary
-// solution specific to mazescraper as a source?
-
-// Probabilly should rename what is now core to importer and split the extension to a new core project
-
-
-// -- Thought #4 
 // The title updated source is probably to specific, to focused on updated ( might not be though )
 // What we also want is a list containing the deleted items. That can be extracted from the same source by running a diff between the current
 // register and the fetched register. Items whom are no longer on there are deleted
@@ -187,16 +166,3 @@ public class Consumer
 		Console.WriteLine( $"[consume] Thread: {Thread.CurrentThread.ManagedThreadId}, Item: ${i}" );
 	}
 }*/
-
-
-public class Title 
-{
-	public int ID { get; set; }
-	public string Name { get; set; } = "";
-
-
-	public override string ToString()
-	{
-		return $"{ID,8} / {Name}";
-	}
-}
