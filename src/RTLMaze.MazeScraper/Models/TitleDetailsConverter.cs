@@ -34,7 +34,9 @@ public partial class TitleDetailsConverter : ITitleDetailConverter
 		return processor.Process( _GetSource( titleId ) );
 	}
 
-	public IEnumerable<Title> Process( IEnumerable<int> titles )
+	public IEnumerable<Title> Process( IEnumerable<int> titles ) => Process( titles, false );
+
+	public IEnumerable<Title> Process( IEnumerable<int> titles, bool skipOnException )
 	{
 		// -- TODO
 		// should the processor be static shared accross all classes; memory / performance wise?
@@ -42,7 +44,27 @@ public partial class TitleDetailsConverter : ITitleDetailConverter
 		var processor = new JsonStreamConverter<Title>();
 
 		foreach( int titleId in titles )
-			yield return processor.Process( _GetSource( titleId ) );
+		{
+			Title title;
+
+			try 
+			{
+				title = processor.Process( _GetSource( titleId ) );
+			}
+			catch( Exception e )
+			{
+				if( skipOnException )
+					continue;
+				
+				// -- TODO 
+				// Hmm but what if we want another handler on execption?
+				// or what if we want to log it and then continue? Not 100% happy with current approach
+
+				throw e;
+			}
+
+			yield return title;
+		}
 	}
 
 	#endregion

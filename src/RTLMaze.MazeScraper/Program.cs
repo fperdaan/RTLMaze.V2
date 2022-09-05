@@ -1,4 +1,7 @@
-﻿using RTLMaze.MazeScraper.Models;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
+using RTLMaze.Importer.Models;
+using RTLMaze.MazeScraper.Models;
 
 // -- Though #1
 
@@ -25,26 +28,26 @@
 
 // --------------------------------------------------
 
-var source = new TitleUpdatedSource();
-	source.Since( DateTime.Now.AddDays( -1 ) ); 
+// var source = new TitleUpdatedSource();
+// 	source.Since( DateTime.Now.AddDays( -1 ) ); 
 
-foreach( var title in source.GetData() )
-{
-	Console.WriteLine( title );
-}
+// foreach( var title in source.GetData() )
+// {
+// 	Console.WriteLine( title );
+// }
 
-// var url = $"https://api.tvmaze.com/shows/10?embed=cast";
+var url = $"https://api.tvmaze.com/shows/10?embed=cast";
 
-// var source = new HttpStreamSource();
-// 	source.FromUrl( url );
+var source = new HttpStreamSource();
+	source.FromUrl( url );
 
-// var processor = new JsonStreamConverter<JsonObject>();
+var processor = new JsonStreamConverter<JsonObject>();
 
-// var result = processor.Process( source.GetData() );
+var result = processor.Process( source.GetData() );
 
-// var options = new JsonSerializerOptions { WriteIndented = true };
+var options = new JsonSerializerOptions { WriteIndented = true };
 
-// Console.WriteLine( JsonSerializer.Serialize( result, options ) );
+Console.WriteLine( JsonSerializer.Serialize( result, options ) );
 
 /*
 var result = Enumerable.Range( 1, 200 );

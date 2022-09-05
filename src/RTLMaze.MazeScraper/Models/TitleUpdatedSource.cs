@@ -49,12 +49,7 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 
 	# region Source interface implementation 
 
-	public virtual IEnumerable<Title> GetData() => GetData( _GetUpdatedItemIndex() );
-
-	/// <summary>
-	/// Alternative interface, allowing the class to be used with specific titleIds, more of a passtrough converting the title ids to a title
-	/// </summary>
-	public virtual IEnumerable<Title> GetData( IEnumerable<int> titleIds ) => new TitleDetailsConverter().Process( titleIds );
+	public virtual IEnumerable<Title> GetData() => new TitleDetailsConverter().Process( _GetUpdatedItemIndex(), skipOnException: true );
 
 	#endregion
 }
