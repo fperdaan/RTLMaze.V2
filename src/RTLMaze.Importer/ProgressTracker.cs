@@ -7,8 +7,8 @@ public class ProgressTracker
 {
 	# region Properties
 
-	const char BLOCK = '■';
-	const int BLOCK_COUNT = 15;
+	private const char BLOCK = '■';
+	private const int BLOCK_COUNT = 15;
 
 	public int ItemCount { get; }
 	public int? AvgItemsPerSecond { get; }
@@ -55,7 +55,7 @@ public class ProgressTracker
 		Timer = new Stopwatch();
 
 		if( itemCount <= 0 )
-			throw new ArgumentException( "Please supply a count higer than 0 to use the tracker", "itemCount" );
+			throw new ArgumentException( "Please supply a count higher than 0 to use the tracker", nameof(itemCount) );
 	}
 
 	public ProgressTracker( int itemCount, int avgItemsPerSecond ) : this( itemCount )

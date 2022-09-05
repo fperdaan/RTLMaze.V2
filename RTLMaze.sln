@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.Core", "src\RTLMaze.Core\RTLMaze.Core.csproj", "{752E52E1-5440-45F6-B547-F1AC7DC61803}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.Importer", "src\RTLMaze.Importer\RTLMaze.Importer.csproj", "{000B0676-0769-4B5A-8EA7-D4CFC813732E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.MazeScraper", "src\RTLMaze.MazeScraper\RTLMaze.MazeScraper.csproj", "{41D770D2-7DB2-4950-9029-39A0EBB355C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.Models", "src\RTLMaze.Models\RTLMaze.Models.csproj", "{A86F9C70-1C12-4D9E-B469-3A0C42411B45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.Core.Tests", "tests\RTLMaze.Core.Tests\RTLMaze.Core.Tests.csproj", "{6DEB7B1B-45C9-41FD-8EF5-C1736FA1E6F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.Importer.Tests", "tests\RTLMaze.Importer.Tests\RTLMaze.Importer.Tests.csproj", "{B7559A0F-ED82-452E-BEA6-2018BBC0061D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{752E52E1-5440-45F6-B547-F1AC7DC61803}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{752E52E1-5440-45F6-B547-F1AC7DC61803}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{752E52E1-5440-45F6-B547-F1AC7DC61803}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{752E52E1-5440-45F6-B547-F1AC7DC61803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{000B0676-0769-4B5A-8EA7-D4CFC813732E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{000B0676-0769-4B5A-8EA7-D4CFC813732E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{000B0676-0769-4B5A-8EA7-D4CFC813732E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{000B0676-0769-4B5A-8EA7-D4CFC813732E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41D770D2-7DB2-4950-9029-39A0EBB355C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D770D2-7DB2-4950-9029-39A0EBB355C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D770D2-7DB2-4950-9029-39A0EBB355C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D770D2-7DB2-4950-9029-39A0EBB355C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A86F9C70-1C12-4D9E-B469-3A0C42411B45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A86F9C70-1C12-4D9E-B469-3A0C42411B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A86F9C70-1C12-4D9E-B469-3A0C42411B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A86F9C70-1C12-4D9E-B469-3A0C42411B45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DEB7B1B-45C9-41FD-8EF5-C1736FA1E6F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DEB7B1B-45C9-41FD-8EF5-C1736FA1E6F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DEB7B1B-45C9-41FD-8EF5-C1736FA1E6F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DEB7B1B-45C9-41FD-8EF5-C1736FA1E6F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7559A0F-ED82-452E-BEA6-2018BBC0061D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7559A0F-ED82-452E-BEA6-2018BBC0061D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7559A0F-ED82-452E-BEA6-2018BBC0061D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7559A0F-ED82-452E-BEA6-2018BBC0061D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
