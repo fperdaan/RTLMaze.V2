@@ -35,6 +35,9 @@ public partial class TitleDetailsConverter : ITitleDetailConverter
 
 	public IEnumerable<Title> Process( IEnumerable<int> titles )
 	{
+		// -- TODO
+		// should the processor be static shared accross all classes; memory / performance wise?
+		// for this method it would mean we can call the singular process recursivly with minimal additional cost
 		var processor = new JsonStreamConverter<Title>();
 
 		foreach( int titleId in titles )

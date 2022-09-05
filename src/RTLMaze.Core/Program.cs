@@ -46,13 +46,13 @@ using RTLMaze.Core.Models.MazeScraper;
 
 // --------------------------------------------------
 
-var source = new TitleUpdatedSource();
-	source.Since( DateTime.Now.AddDays( -1 ) ); 
+// var source = new TitleUpdatedSource();
+// 	source.Since( DateTime.Now.AddDays( -1 ) ); 
 
-foreach( var title in source.GetData() )
-{
-	Console.WriteLine( title );
-}
+// foreach( var title in source.GetData() )
+// {
+// 	Console.WriteLine( title );
+// }
 
 // var url = $"https://api.tvmaze.com/shows/10?embed=cast";
 
