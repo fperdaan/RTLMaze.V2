@@ -36,6 +36,9 @@ using RTLMaze.Core.Models.MazeScraper;
 // Hmm but how do we make this managable; should we introduce an abstract solution containing logic/interfaces for scraping and then a secondary
 // solution specific to mazescraper as a source?
 
+// Probabilly should rename what is now core to importer and split the extension to a new core project
+
+
 // -- Thought #4 
 // The title updated source is probably to specific, to focused on updated ( might not be though )
 // What we also want is a list containing the deleted items. That can be extracted from the same source by running a diff between the current
@@ -43,14 +46,28 @@ using RTLMaze.Core.Models.MazeScraper;
 
 // --------------------------------------------------
 
-// var source = new TitleUpdatedSource();
-// 	source.Since( DateTime.Now.AddDays( -1 ) ); 
+var source = new TitleUpdatedSource();
+	source.Since( DateTime.Now.AddDays( -1 ) ); 
 
-// foreach( var title in source.GetData() )
-// {
-// 	Console.WriteLine( title );
-// }
+foreach( var title in source.GetData() )
+{
+	Console.WriteLine( title );
+}
 
+// var url = $"https://api.tvmaze.com/shows/10?embed=cast";
+
+// var source = new HttpStreamSource();
+// 	source.FromUrl( url );
+
+// var processor = new JsonStreamConverter<JsonObject>();
+
+// var result = processor.Process( source.GetData() );
+
+// var options = new JsonSerializerOptions { WriteIndented = true };
+
+// Console.WriteLine( JsonSerializer.Serialize( result, options ) );
+
+/*
 var result = Enumerable.Range( 1, 200 );
 
 // As per ratelimiter; allow 10 items per 5 seconds
@@ -66,7 +83,7 @@ foreach( var itemId in result )
 
 	Console.SetCursorPosition( pos.Left, pos.Top );
 	Console.WriteLine( tracker );
-}
+}*/
 
 
 // var test = new JsonObject
@@ -176,4 +193,10 @@ public class Title
 {
 	public int ID { get; set; }
 	public string Name { get; set; } = "";
+
+
+	public override string ToString()
+	{
+		return $"{ID,8} / {Name}";
+	}
 }

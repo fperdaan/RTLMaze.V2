@@ -1,6 +1,8 @@
+using RTLMaze.Core.Models.Importer;
+
 namespace RTLMaze.Core.Models.MazeScraper;
 
-public partial class TitleDetailsConverter : IProcessor<int, Title>
+public partial class TitleDetailsConverter : ITitleDetailConverter
 {
 	/// <summary>
 	/// Helper method used to converts the specified title id to a streaming source.
@@ -31,5 +33,13 @@ public partial class TitleDetailsConverter : IProcessor<int, Title>
 		return processor.Process( _GetSource( titleId ) );
 	}
 
-	# endregion
+	public IEnumerable<Title> Process( IEnumerable<int> titles )
+	{
+		var processor = new JsonStreamConverter<Title>();
+
+		foreach( int titleId in titles )
+			yield return processor.Process( _GetSource( titleId ) );
+	}
+
+	#endregion
 }

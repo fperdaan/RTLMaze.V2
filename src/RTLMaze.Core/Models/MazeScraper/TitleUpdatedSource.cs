@@ -44,24 +44,15 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 				.ToList();
 	}
 
+
 	# region Source interface implementation 
 
-	public virtual IEnumerable<Title> GetData()
-	{
-		// We shouldn't be knowing this but the processor requests a (rate-limited) web resource.
-		// In theory this is indirectly ratelimited through DI configiration, so we dont need to do it here. 
-		
-		var updated = _GetUpdatedItemIndex();
-		var converter = new TitleDetailsConverter();
+	public virtual IEnumerable<Title> GetData() => GetData( _GetUpdatedItemIndex() );
 
-		foreach( var titleId in updated )
-		{
-			var title = converter.Process( titleId );
+	/// <summary>
+	/// Alternative interface, allowing the class to be used with specific titleIds, more of a passtrough converting the title ids to a title
+	/// </summary>
+	public virtual IEnumerable<Title> GetData( IEnumerable<int> titleIds ) => new TitleDetailsConverter().Process( titleIds );
 
-			yield return title;
-		}
-
-	}
-
-	# endregion
+	#endregion
 }
