@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Text;
 
-namespace RTLMaze.Core;
+namespace RTLMaze.Importer;
 
 public class ProgressTracker
 {

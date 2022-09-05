@@ -1,7 +1,7 @@
 using System.Text;
 using System.Text.Json;
 
-namespace RTLMaze.Core.Tests.JsonStreamConverter;
+namespace RTLMaze.Importer.Tests.JsonStreamConverter;
 
 [TestClass]
 public class Process_Should
@@ -15,7 +15,7 @@ public class Process_Should
 		var json = JsonSerializer.Serialize( expectedResult );
 		var stream = new MemoryStream( Encoding.UTF8.GetBytes( json ) );
 
-		var actor = new SUT.Models.JsonStreamConverter<JsonMockObject>();
+		var actor = new SUT.Importer.Models.JsonStreamConverter<JsonMockObject>();
 
 		// Act 
 		var result = actor.Process( stream );
@@ -34,10 +34,10 @@ public class Process_Should
 		var json = "Hello world!";
 		var stream = new MemoryStream( Encoding.UTF8.GetBytes( json ) );
 
-		var actor = new SUT.Models.JsonStreamConverter<JsonMockObject>();
+		var actor = new SUT.Importer.Models.JsonStreamConverter<JsonMockObject>();
 
 		// Act & Assert
-		Assert.ThrowsException<SUT.Exceptions.JsonParseException>( () => actor.Process( stream ) );
+		Assert.ThrowsException<SUT.Importer.Exceptions.JsonParseException>( () => actor.Process( stream ) );
     }
 
 	[TestMethod]
@@ -47,10 +47,10 @@ public class Process_Should
 		var json = JsonSerializer.Serialize( new int[]{1,2,3});
 		var stream = new MemoryStream( Encoding.UTF8.GetBytes( json ) );
 
-		var actor = new SUT.Models.JsonStreamConverter<JsonMockObject>();
+		var actor = new SUT.Importer.Models.JsonStreamConverter<JsonMockObject>();
 
 		// Act & Assert
-		Assert.ThrowsException<SUT.Exceptions.JsonParseException>( () => actor.Process( stream ) );
+		Assert.ThrowsException<SUT.Importer.Exceptions.JsonParseException>( () => actor.Process( stream ) );
     }
 }
 

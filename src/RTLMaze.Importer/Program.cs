@@ -5,10 +5,10 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using Polly;
 using Polly.RateLimit;
-using RTLMaze.Core;
-using RTLMaze.Core.Models;
+using RTLMaze.Importer;
+using RTLMaze.Importer.Models;
 
-using RTLMaze.Core.Models.MazeScraper;
+using RTLMaze.Importer.Models.MazeScraper;
 
 
 
@@ -46,13 +46,13 @@ using RTLMaze.Core.Models.MazeScraper;
 
 // --------------------------------------------------
 
-// var source = new TitleUpdatedSource();
-// 	source.Since( DateTime.Now.AddDays( -1 ) ); 
+var source = new TitleUpdatedSource();
+	source.Since( DateTime.Now.AddDays( -1 ) ); 
 
-// foreach( var title in source.GetData() )
-// {
-// 	Console.WriteLine( title );
-// }
+foreach( var title in source.GetData() )
+{
+	Console.WriteLine( title );
+}
 
 // var url = $"https://api.tvmaze.com/shows/10?embed=cast";
 

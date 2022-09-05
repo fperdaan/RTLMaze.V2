@@ -1,6 +1,7 @@
-using RTLMaze.Core.Models.Importer;
+using RTLMaze.Core;
+using RTLMaze.Importer.Models.Importer;
 
-namespace RTLMaze.Core.Models.MazeScraper;
+namespace RTLMaze.Importer.Models.MazeScraper;
 
 public partial class TitleUpdatedSource : ITitleUpdatedSource
 {

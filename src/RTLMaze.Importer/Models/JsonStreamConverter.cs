@@ -1,8 +1,8 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using RTLMaze.Core.Exceptions;
+using RTLMaze.Importer.Exceptions;
 
-namespace RTLMaze.Core.Models;
+namespace RTLMaze.Importer.Models;
 
 public partial class JsonStreamConverter<TOutput> : IProcessor<Stream, TOutput>
 {

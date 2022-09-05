@@ -1,4 +1,4 @@
-namespace RTLMaze.Core.Models.Importer;
+namespace RTLMaze.Importer.Models.Importer;
 
 public interface ITitleUpdatedSource : ISource<IEnumerable<Title>>
 {

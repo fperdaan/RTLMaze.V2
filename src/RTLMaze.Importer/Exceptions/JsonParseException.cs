@@ -1,4 +1,4 @@
-namespace RTLMaze.Core.Exceptions;
+namespace RTLMaze.Importer.Exceptions;
 
 public class JsonParseException : Exception
 {
