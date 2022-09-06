@@ -13,7 +13,7 @@ public class ProgressTracker
 	public int ItemCount { get; }
 	public int? AvgItemsPerSecond { get; }
 	public int CurrentItem { get; private set; }
-	public Stopwatch Timer { get; private set; }
+	public Stopwatch Timer { get; }
 
 	public double EstimatedTotalTime 
 	{ 
@@ -26,24 +26,10 @@ public class ProgressTracker
 		}
 	}
 
-	public double EstimatedRemainingTime 
-	{
-		get 
-		{
-			if( AvgItemsPerSecond == null )
-				return 0;
+	public double EstimatedRemainingTime => 
+		AvgItemsPerSecond != null ? ( ItemCount - CurrentItem ) / (double)AvgItemsPerSecond : 0;
 
-			return ( ItemCount - CurrentItem ) / (double)AvgItemsPerSecond;
-		}
-	}
-
-	public decimal Progress 
-	{
-		get 
-		{
-			return CurrentItem > 0 ? ( (decimal)CurrentItem / ItemCount ) * 100m : 0m;
-		}
-	}
+	public decimal Progress => CurrentItem > 0 ? ( (decimal)CurrentItem / ItemCount ) * 100m : 0m;
 
 	# endregion
 	# region Constructors
@@ -88,8 +74,7 @@ public class ProgressTracker
 	/// </summary>
 	public ProgressTracker Stop()
 	{
-		if( Timer != null )
-			Timer.Stop();
+		Timer.Stop();
 
 		return this;
 	}
@@ -102,7 +87,7 @@ public class ProgressTracker
 		var content = new StringBuilder();
 
 		content.AppendLine( $"Estimated time: {EstimatedTotalTime:F2} seconds, Estimated time remaining {EstimatedRemainingTime:F2} seconds" );
-		content.AppendLine( $"Time elapsed: {Timer!.Elapsed.TotalSeconds:F2} seconds" );
+		content.AppendLine( $"Time elapsed: {Timer.Elapsed.TotalSeconds:F2} seconds" );
 		content.AppendLine();
 
 		content.Append( '[' );
@@ -111,10 +96,7 @@ public class ProgressTracker
 
 		for ( int i = 0; i < BLOCK_COUNT; ++i )
 		{
-			if ( i >= progress )
-				content.Append( ' ' );
-			else
-				content.Append( BLOCK );
+			content.Append( i >= progress ? ' ' : BLOCK );
 		}
 
 		content.Append( $"] {Progress:F2}%, {CurrentItem}/{ItemCount}" );    

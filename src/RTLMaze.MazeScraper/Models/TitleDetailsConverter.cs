@@ -9,7 +9,9 @@ public partial class TitleDetailsConverter : ITitleDetailConverter
 	/// Helper method used to converts the specified title id to a streaming source.
 	/// </summary>
 	/// <param name="titleId">The id the title gets referred by.</param>
-	/// <see cref="Process"/>
+	/// <see>
+	///     <cref>Process</cref>
+	/// </see>
 	protected virtual Stream _GetSource( int titleId )
 	{
 		// Not sure whether we should make this path configurable
