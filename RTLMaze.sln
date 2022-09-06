@@ -12,6 +12,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.Core.Tests", "tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.Importer.Tests", "tests\RTLMaze.Importer.Tests\RTLMaze.Importer.Tests.csproj", "{B7559A0F-ED82-452E-BEA6-2018BBC0061D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.REST", "src\RTLMaze.REST\RTLMaze.REST.csproj", "{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{B7559A0F-ED82-452E-BEA6-2018BBC0061D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7559A0F-ED82-452E-BEA6-2018BBC0061D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7559A0F-ED82-452E-BEA6-2018BBC0061D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
