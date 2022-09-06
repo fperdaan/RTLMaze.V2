@@ -15,16 +15,7 @@ public class ProgressTracker
 	public int CurrentItem { get; private set; }
 	public Stopwatch Timer { get; }
 
-	public double EstimatedTotalTime 
-	{ 
-		get 
-		{
-			if( AvgItemsPerSecond == null )
-				return 0;
-
-			return ItemCount / (double)AvgItemsPerSecond;
-		}
-	}
+	public double EstimatedTotalTime => AvgItemsPerSecond != null ? ItemCount / (double)AvgItemsPerSecond : 0; 
 
 	public double EstimatedRemainingTime => 
 		AvgItemsPerSecond != null ? ( ItemCount - CurrentItem ) / (double)AvgItemsPerSecond : 0;
@@ -41,7 +32,7 @@ public class ProgressTracker
 		Timer = new Stopwatch();
 
 		if( itemCount <= 0 )
-			throw new ArgumentException( "Please supply a count higher than 0 to use the tracker", nameof(itemCount) );
+			throw new ArgumentException( "Please supply a count higher than 0 to use the tracker", nameof( itemCount ) );
 	}
 
 	public ProgressTracker( int itemCount, int avgItemsPerSecond ) : this( itemCount )
