@@ -11,14 +11,14 @@ using RTLMaze.MazeScraper.Models;
 
 // Next?.Process()
 
-// Can we make this work in the generic interface? Not with a return chain I think, so maybe the processor indeed is a diffent class.
+// Can we make this work in the generic interface? Not with a return chain I think, so maybe the processor indeed is a different class.
 // Not returning anything but do allow chaining of results into one another? 
 
 
 // -- Thought #2
 // Not really sure how the async methods in IProcessor and ISource really benefit in the current setup. This should probably be determined by 
 // the source / processor. Does that mean however that we also need to split up the interfaces into a sync and async interface? 
-// and how will that affect our coupeling? 
+// and how will that affect our coupling? 
 
 
 // -- Thought #3 
@@ -53,7 +53,7 @@ Console.WriteLine( JsonSerializer.Serialize( result, options ) );
 /*
 var result = Enumerable.Range( 1, 200 );
 
-// As per ratelimiter; allow 10 items per 5 seconds
+// As per rate-limiter; allow 10 items per 5 seconds
 var tracker = new ProgressTracker( itemCount: result.Count(), avgItemsPerSecond: 10 / 5 );
 
 var pos = Console.GetCursorPosition();
@@ -78,7 +78,7 @@ foreach( var itemId in result )
 // 		new JsonObject 
 // 		{
 // 			["ID"] = 20,
-// 			["Name"] = "Some peroson",
+// 			["Name"] = "Some person",
 // 			["BirthDay"] = DateOnly.FromDateTime( DateTime.Now ).ToString("yyyy-MM-dd")
 // 		}
 // 	} 
