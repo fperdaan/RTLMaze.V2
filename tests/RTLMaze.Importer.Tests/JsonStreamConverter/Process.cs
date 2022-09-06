@@ -23,8 +23,8 @@ public class Process_Should
 		// Assert
 		Assert.IsNotNull( result );
 		Assert.AreEqual( expected: expectedResult.GetType().Name, actual: result.GetType().Name );
-		Assert.AreEqual( expected: expectedResult?.ID, actual: result.ID );
-		Assert.AreEqual( expected: expectedResult?.Name, actual: result.Name );
+		Assert.AreEqual( expected: expectedResult.ID, actual: result.ID );
+		Assert.AreEqual( expected: expectedResult.Name, actual: result.Name );
     }
 
 	[TestMethod]
@@ -44,7 +44,7 @@ public class Process_Should
     public void ThrowException_OnInUnexpectedJsonInput()
     {
 		// Arrange 
-		var json = JsonSerializer.Serialize( new int[]{1,2,3});
+		var json = JsonSerializer.Serialize( new[]{1,2,3} );
 		var stream = new MemoryStream( Encoding.UTF8.GetBytes( json ) );
 
 		var actor = new SUT.Importer.Models.JsonStreamConverter<JsonMockObject>();
@@ -56,6 +56,6 @@ public class Process_Should
 
 internal class JsonMockObject 
 {
-	public int ID { get; set; }
-	public string? Name { get; set; }
+	public int ID { get; init; }
+	public string? Name { get; init; }
 }

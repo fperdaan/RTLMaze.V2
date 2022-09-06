@@ -7,7 +7,7 @@ public class WhereIf_Should
     public void Apply_WhenConditionMet()
     {
 		// Arrange 
-		var actor = new int[]{ 1, 2, 3 };
+		var actor = new[]{ 1, 2, 3 };
 		var filteredValue = 2;
 
 		// Act 

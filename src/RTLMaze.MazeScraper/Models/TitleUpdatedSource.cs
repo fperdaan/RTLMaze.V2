@@ -28,7 +28,7 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 	/// <see cref="GetData"/>
 	protected virtual IEnumerable<int> _GetUpdatedItemIndex()
 	{
-		// Not sure wether we should make this path configurable
+		// Not sure whether we should make this path configurable
 		// After all the import and parsing is tightly coupled to the source
 
 		var source = new HttpStreamSource()

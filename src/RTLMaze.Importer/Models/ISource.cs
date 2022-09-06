@@ -1,6 +1,6 @@
 namespace RTLMaze.Importer.Models;
 
-public interface ISource<T>
+public interface ISource<out TOutput>
 {
-	public T GetData();
+	public TOutput GetData();
 }

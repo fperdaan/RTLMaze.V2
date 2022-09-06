@@ -13,7 +13,7 @@ public partial class HttpStreamSource : ISource<Stream>
 	{
 		// -- todo; inject with DI and make non-static
 		# region TODO
-		var codes = new HttpStatusCode[]{
+		var codes = new[]{
 			HttpStatusCode.RequestTimeout, // 408
 			HttpStatusCode.InternalServerError, // 500
 			HttpStatusCode.BadGateway, // 502
@@ -67,12 +67,12 @@ public partial class HttpStreamSource : ISource<Stream>
 	public virtual async Task<Stream> GetDataAsync()
 	{
 		if( _sourceUrl == null )
-			throw new ArgumentException( message: "Source is not set", paramName: "_sourceUrl" );
+			throw new ArgumentException( message: "Source is not set", nameof( _sourceUrl ) );
 
 		var client = new HttpClient();		
 		var result = await RequestPolicy.ExecuteAsync( () => client.GetAsync( _sourceUrl ) );
 
-		return result.Content.ReadAsStream();
+		return await result.Content.ReadAsStreamAsync();
 	}
 
 	# endregion

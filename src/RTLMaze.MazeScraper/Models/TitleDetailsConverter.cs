@@ -12,7 +12,7 @@ public partial class TitleDetailsConverter : ITitleDetailConverter
 	/// <see cref="Process"/>
 	protected virtual Stream _GetSource( int titleId )
 	{
-		// Not sure wether we should make this path configurable
+		// Not sure whether we should make this path configurable
 		// After all the import and parsing is tightly coupled to the source
 		var url = $"https://api.tvmaze.com/shows/{titleId}?embed=cast";
 
@@ -27,7 +27,7 @@ public partial class TitleDetailsConverter : ITitleDetailConverter
 	public virtual Title Process( int titleId )
 	{
 		// -- TODO
-		// should the processor be static shared accross all classes; memory / performance wise?
+		// should the processor be static shared across all classes; memory / performance wise?
 
 		var processor = new JsonStreamConverter<Title>();
 
@@ -39,8 +39,8 @@ public partial class TitleDetailsConverter : ITitleDetailConverter
 	public IEnumerable<Title> Process( IEnumerable<int> titles, bool skipOnException )
 	{
 		// -- TODO
-		// should the processor be static shared accross all classes; memory / performance wise?
-		// for this method it would mean we can call the singular process recursivly with minimal additional cost
+		// should the processor be static shared across all classes; memory / performance wise?
+		// for this method it would mean we can call the singular process recursively with minimal additional cost
 		var processor = new JsonStreamConverter<Title>();
 
 		foreach( int titleId in titles )
@@ -51,17 +51,17 @@ public partial class TitleDetailsConverter : ITitleDetailConverter
 			{
 				title = processor.Process( _GetSource( titleId ) );
 			}
-			catch( Exception e )
+			catch( Exception )
 			{
 				if( skipOnException )
 					continue;
-				
-				// -- TODO 
-				// Hmm but what if we want another handler on execption?
-				// or what if we want to log it and then continue? Not 100% happy with current approach
 
-				throw e;
-			}
+                // -- TODO 
+                // Hmm but what if we want another handler on exception?
+                // or what if we want to log it and then continue? Not 100% happy with current approach
+
+                throw;
+            }
 
 			yield return title;
 		}
