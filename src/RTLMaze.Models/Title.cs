@@ -5,10 +5,10 @@ public class Title
 {
 	public int ID { get; set; }
 	public string Name { get; set; } = "";
-
-
+	public DateOnly? Premiered { get; set; }
+	
 	public override string ToString()
 	{
-		return $"{ID,8} / {Name}";
+		return $"{ID,8} / {Name} / {Premiered}";
 	}
 }

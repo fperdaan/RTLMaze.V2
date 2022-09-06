@@ -1,8 +1,10 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Nodes;
+using RTLMaze.Core.Serializers;
 using RTLMaze.Importer;
 using RTLMaze.Importer.Models;
 using RTLMaze.MazeScraper.Models;
+using RTLMaze.Models;
 
 // -- Though #1
 
@@ -39,37 +41,48 @@ using RTLMaze.MazeScraper.Models;
 // 	Console.WriteLine( title );
 // }
 
-// var url = $"https://api.tvmaze.com/shows/10?embed=cast";
-//
-// var source = new HttpStreamSource();
-// 	source.FromUrl( url );
-//
-// var processor = new JsonStreamConverter<JsonObject>();
-//
-// var result = processor.Process( source.GetData() );
-//
-// var options = new JsonSerializerOptions { WriteIndented = true };
-//
-// Console.WriteLine( JsonSerializer.Serialize( result, options ) );
 
+var url = $"https://api.tvmaze.com/shows/10?embed=cast";
 
+var source = new HttpStreamSource();
+	source.FromUrl( url );
 
-var result = Enumerable.Range( 1, 200 ).ToList();
-
-// As per rate-limiter; allow 10 items per 5 seconds
-var tracker = new ProgressTracker( itemCount: result.Count(), avgItemsPerSecond: 10 / 5 );
-
-var pos = Console.GetCursorPosition();
-
-foreach( var itemId in result )
+var options = new JsonSerializerOptions
 {
-	await Task.Delay(200);
+	WriteIndented = true,
+	PropertyNameCaseInsensitive = true,
+	Converters =
+	{
+		new DateOnlyNullableSerializer(),
+		new DateOnlySerializer()
+	}
+};
 
-	tracker.Next();	
-	
-	Console.SetCursorPosition( pos.Left, pos.Top );
-	Console.WriteLine( tracker );
-}
+var processor = new JsonStreamConverter<Title>();
+processor.SetSerializerOptions( options );
+
+var result = processor.Process( source.GetData() );
+
+Console.WriteLine( result );
+
+
+
+// var result = Enumerable.Range( 1, 200 ).ToList();
+//
+// // As per rate-limiter; allow 10 items per 5 seconds
+// var tracker = new ProgressTracker( itemCount: result.Count(), avgItemsPerSecond: 10 / 5 );
+//
+// var pos = Console.GetCursorPosition();
+//
+// foreach( var itemId in result )
+// {
+// 	await Task.Delay(200);
+//
+// 	tracker.Next();	
+// 	
+// 	Console.SetCursorPosition( pos.Left, pos.Top );
+// 	Console.WriteLine( tracker );
+// }
 
 
 // var test = new JsonObject
