@@ -2,7 +2,7 @@ using System.Net;
 using Polly;
 using Polly.RateLimit;
 
-namespace RTLMaze.Importer.Models;
+namespace RTLMaze.Importer;
 
 public partial class HttpStreamSource : ISource<Stream>
 {

@@ -1,4 +1,4 @@
-namespace RTLMaze.Importer.Models;
+namespace RTLMaze.Importer;
 
 public interface ITitleDeletedSource : ISource<IEnumerable<int>>
 {

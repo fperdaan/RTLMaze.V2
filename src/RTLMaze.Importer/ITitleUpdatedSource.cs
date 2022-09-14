@@ -1,5 +1,5 @@
 using RTLMaze.Models;
-namespace RTLMaze.Importer.Models;
+namespace RTLMaze.Importer;
 
 public interface ITitleUpdatedSource : ISource<IEnumerable<Title>>
 {

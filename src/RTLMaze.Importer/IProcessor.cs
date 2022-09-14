@@ -1,4 +1,4 @@
-namespace RTLMaze.Importer.Models;
+namespace RTLMaze.Importer;
 
 public interface IProcessor<in TInput, out TOutput>
 {
