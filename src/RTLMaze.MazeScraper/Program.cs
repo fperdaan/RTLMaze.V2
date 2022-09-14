@@ -22,12 +22,6 @@ using RTLMaze.Models;
 // probably be determined by  the source / processor. Does that mean however that we also need to split up the
 // interfaces into a sync and async interface? and how will that affect our coupling? 
 
-
-// -- Thought #3 
-// The title updated source is probably to specific, to focused on updated ( might not be though )
-// What we also want is a list containing the deleted items. That can be extracted from the same source by running a
-// diff between the current register and the fetched register. Items whom are no longer on there are deleted
-
 // --------------------------------------------------
 
 // var source = new TitleUpdatedSource();
