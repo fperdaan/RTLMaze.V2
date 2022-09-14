@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.Importer.Tests", "t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.REST", "src\RTLMaze.REST\RTLMaze.REST.csproj", "{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTLMaze.DAL", "src\RTLMaze.DAL\RTLMaze.DAL.csproj", "{DA4599D7-8F94-4FD2-A335-C611E379CEF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9DAB57B-AAC5-424F-B265-C8891D7E3B2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA4599D7-8F94-4FD2-A335-C611E379CEF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA4599D7-8F94-4FD2-A335-C611E379CEF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA4599D7-8F94-4FD2-A335-C611E379CEF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA4599D7-8F94-4FD2-A335-C611E379CEF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
