@@ -1,0 +1,26 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=db93757b_002Dc3ca_002D494a_002D8919_002D3739985ff67d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Or&gt;
+    &lt;And&gt;
+      &lt;TestAncestor&gt;
+        &lt;TestId&gt;MSTest::6DEB7B1B-45C9-41FD-8EF5-C1736FA1E6F0::net6.0::RTLMaze.Core.Tests.DateOnlySerializer.Read_Should.FormatProperly_WhenSuppliedCorrect&lt;/TestId&gt;
+      &lt;/TestAncestor&gt;
+      &lt;Project Location="/Users/fperdaan/Projects/RTLMaze.V2/tests/RTLMaze.Core.Tests" Presentation="&amp;lt;RTLMaze.Core.Tests&amp;gt;" /&gt;
+      &lt;Namespace&gt;RTLMaze.Core.Tests.DateOnlySerializer&lt;/Namespace&gt;
+    &lt;/And&gt;
+    &lt;And&gt;
+      &lt;TestAncestor&gt;
+        &lt;TestId&gt;MSTest::6DEB7B1B-45C9-41FD-8EF5-C1736FA1E6F0::net6.0::RTLMaze.Core.Tests.DateOnlySerializer.Read_Should.ThrowException_WhenSuppliedIncorrect&lt;/TestId&gt;
+      &lt;/TestAncestor&gt;
+      &lt;Project Location="/Users/fperdaan/Projects/RTLMaze.V2/tests/RTLMaze.Core.Tests" Presentation="&amp;lt;RTLMaze.Core.Tests&amp;gt;" /&gt;
+      &lt;Namespace&gt;RTLMaze.Core.Tests.DateOnlySerializer&lt;/Namespace&gt;
+    &lt;/And&gt;
+    &lt;And&gt;
+      &lt;TestAncestor&gt;
+        &lt;TestId&gt;MSTest::6DEB7B1B-45C9-41FD-8EF5-C1736FA1E6F0::net6.0::RTLMaze.Core.Tests.DateOnlySerializer.Write_Should&lt;/TestId&gt;
+      &lt;/TestAncestor&gt;
+      &lt;Project Location="/Users/fperdaan/Projects/RTLMaze.V2/tests/RTLMaze.Core.Tests" Presentation="&amp;lt;RTLMaze.Core.Tests&amp;gt;" /&gt;
+      &lt;Namespace&gt;RTLMaze.Core.Tests.DateOnlySerializer&lt;/Namespace&gt;
+    &lt;/And&gt;
+  &lt;/Or&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
