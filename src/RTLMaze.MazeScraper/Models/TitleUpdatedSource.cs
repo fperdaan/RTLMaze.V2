@@ -11,7 +11,7 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 
 	# region Configuration interface
 
-	public int EstimatedCount() => _GetUpdatedItemIndex().Count();
+	public int EstimatedCount() => GetDataAsIndex().Count();
 
 	public virtual ITitleUpdatedSource Since( DateTime? date )
 	{
@@ -28,11 +28,16 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 
 	# endregion
 
+
+	# region Source interface implementation 
+
+	public virtual IEnumerable<Title> GetData() => new TitleDetailsConverter().Process( GetDataAsIndex(), skipOnException: true );
+	
 	/// <summary>
 	/// Helper method to return an index of the updated items.
 	/// </summary>
 	/// <see cref="GetData"/>
-	protected virtual ICollection<int> _GetUpdatedItemIndex()
+	public virtual IEnumerable<int> GetDataAsIndex()
 	{
 		if ( _updatedIndex != null )
 			return _updatedIndex;
@@ -41,7 +46,7 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 		// After all the import and parsing is tightly coupled to the source
 
 		var source = new HttpStreamSource()
-					.FromUrl("https://api.tvmaze.com/updates/shows");
+			.FromUrl("https://api.tvmaze.com/updates/shows");
 
 		var processor = new JsonStreamConverter<Dictionary<string,long>>();
 		
@@ -50,17 +55,11 @@ public partial class TitleUpdatedSource : ITitleUpdatedSource
 		// Cast the list to our format and possibly filter by update date
 	
 		_updatedIndex = updated
-				.WhereIf( _sinceDate != null, kp => kp.Value > _sinceDate )
-				.Select( kp => Int32.Parse( kp.Key ) )
-				.ToList();
+			.WhereIf( _sinceDate != null, kp => kp.Value > _sinceDate )
+			.Select( kp => Int32.Parse( kp.Key ) )
+			.ToList();
 
 		return _updatedIndex;
 	}
-
-
-	# region Source interface implementation 
-
-	public virtual IEnumerable<Title> GetData() => new TitleDetailsConverter().Process( _GetUpdatedItemIndex(), skipOnException: true );
-
 	#endregion
 }
