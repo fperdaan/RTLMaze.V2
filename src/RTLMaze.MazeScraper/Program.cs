@@ -3,6 +3,7 @@ using System.Text.Json.Nodes;
 using RTLMaze.Core.Serializers;
 using RTLMaze.Importer;
 using RTLMaze.Importer.Models;
+using RTLMaze.MazeScraper.Deserializer;
 using RTLMaze.MazeScraper.Models;
 using RTLMaze.Models;
 
@@ -42,7 +43,7 @@ using RTLMaze.Models;
 // }
 
 
-var url = $"https://api.tvmaze.com/shows/10?embed=cast";
+const string url = $"https://api.tvmaze.com/shows/10?embed=cast";
 
 var source = new HttpStreamSource();
 	source.FromUrl( url );
@@ -54,7 +55,10 @@ var options = new JsonSerializerOptions
 	Converters =
 	{
 		new DateOnlyNullableSerializer(),
-		new DateOnlySerializer()
+		new DateOnlySerializer(),
+		
+		new TitleDeserializer(),
+		new CastDeserializer()
 	}
 };
 
@@ -63,7 +67,7 @@ processor.SetSerializerOptions( options );
 
 var result = processor.Process( source.GetData() );
 
-Console.WriteLine( result );
+Console.WriteLine( JsonSerializer.Serialize( result, options ) );
 
 
 
