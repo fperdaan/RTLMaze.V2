@@ -1,4 +1,11 @@
+using System.Net;
+using System.Text.Json;
+
 var builder = WebApplication.CreateBuilder( args );
+
+
+// use lowercase urls
+builder.Services.AddRouting( options => options.LowercaseUrls = true );
 
 // Add services to the container.
 
